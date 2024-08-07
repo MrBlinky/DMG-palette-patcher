@@ -25,6 +25,13 @@ dmg-grey-patcher.py romfile
 saves a patched copy of the rom to a new file in the same directory as the
 romfile ending with '-grey-patched.gb'
 
+When Python 3 is installed on Windows and was added to the system path. You 
+may also drag and drop roms directly onto the python script from explorer.
+
+On OSX use terminal and type:
+
+python3 dmg-grey-patcher.py romfile
+
 ### Dependencies
 
 The ability to run Python 3 scripts on your OS
