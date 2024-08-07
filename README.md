@@ -18,9 +18,13 @@ character doesn't matter.
 To makes things easier, I wrote a Python 3 script that patches the rom to meet
 the Gameboy Color requirements for selecting the grey palette.
 
-### USAGE:
+### USAGE
 
 dmg-grey-patcher.py romfile
 
 saves a patched copy of the rom to a new file in the same directory as the
 romfile ending with '-grey-patched.gb'
+
+### Dependencies
+
+The ability to run Python 3 scripts on your OS
