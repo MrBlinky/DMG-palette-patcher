@@ -1,6 +1,6 @@
 import sys,os
 
-print("Gameboy (DMG) grey palette rom  patcher v1.0 by Mr.Blinky Aug 2024\n")
+print("Gameboy (DMG) grey palette rom  patcher v1.1 by Mr.Blinky Aug 2024\n")
 
 if len (sys.argv) < 2:
     print("No Gameboy rom filename specified. Nothing to patch.")
@@ -20,11 +20,13 @@ for i in range(16):
     csum = (csum + rom[0x0134+i]) & 0xFF
 fix = (0x58 - csum) & 0xFF
 if fix != 0: # checksum needs to be fixed
-    # try last character /GBC flag byte
-    if (rom[0x0143] + fix) < 0x80:
-        rom[0x0143] = rom[0x0143] + fix
-    else: # change the 15th title character
-        rom[0x0142] = (rom[0x0142] + fix) &0xFF
+    if (rom[0x0143] + fix) & 0x80: # bit 7 must remain 0 for DMG mode
+        #compensate bit 7 by adding a space to last 4 title chars (00 >> space, Uppercase >> lower case)
+        rom[0x013F] = (rom[0x013F] + 0x20) &0xFF 
+        rom[0x0140] = (rom[0x0140] + 0x20) &0xFF
+        rom[0x0141] = (rom[0x0141] + 0x20) &0xFF
+        rom[0x0142] = (rom[0x0142] + 0x20) &0xFF
+    rom[0x0143] = (rom[0x0143] + fix) & 0x7F
     romchanged = True
 
 if rom[0x014B] == 0x33: #new licence type
