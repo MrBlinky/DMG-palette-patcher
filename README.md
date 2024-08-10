@@ -35,3 +35,22 @@ python3 dmg-grey-patcher.py romfile
 ### Dependencies
 
 The ability to run Python 3 scripts on your OS
+
+# UPDATE
+
+Of all the possible combinations there are 46 unique palettes that can be used.
+I wrote another script that allowes any of those palettes to be patched which
+basically makes the dmg-gret-patcher.py scripts obselete. The new script:
+
+### USAGE
+
+dmg-pal-patcher.py romfile [palette_index]
+
+romfile is the gb rom filename, palette_index is the palette index value from
+0 to 45. When the palette parameter is not specified, the default grey
+palette (value 11) is used. 
+
+Here's a image showing the available palettes with their corresponding index number:
+
+![palette](https://raw.githubusercontent.com/MrBlinky/DMG-palette-patcher/main/dmg-palettes.png)
+
