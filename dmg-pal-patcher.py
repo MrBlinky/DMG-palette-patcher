@@ -1,6 +1,6 @@
 import sys,os
 
-print("Gameboy (DMG) rom palette patcher v1.0 by Mr.Blinky Aug 2024\n")
+print("Gameboy (DMG) rom palette patcher v1.1 by Mr.Blinky Aug 2024\n")
 
 IDX_PNUM = 0
 IDX_PDAT = 1
@@ -8,7 +8,7 @@ IDX_CHAR = 2
 IDX_CSUM = 3
 
 palette_lut = [
-  # 46 unique palettes (original palette index, palette data, 4th char, checksum)
+  # 45 unique palettes (original palette index, palette data, 4th char, checksum)
   (0,  0x7C, '',  0x00), 
   (1,  0x08, '',  0x88), # original palette index: as used by GBC bootrom
   (2,  0x12, '',  0x16), 
@@ -39,7 +39,6 @@ palette_lut = [
   (34, 0xAE, '',  0x17),
   (35, 0xAF, '',  0x10),
   (37, 0xB2, '',  0xF7),
-  (38, 0xAF, '',  0xF6),
   (41, 0xAB, '',  0x4E),
   (50, 0x13, '',  0xE8),
   (56, 0xAD, '',  0x9D),
@@ -97,6 +96,7 @@ palette_lut = [
   #(45, 0xAE, '',  0x8B),
   #(85, 0xAE, 'N', 0x27),
   #(86, 0xAE, 'A', 0x61),
+  #(38, 0xAF, '',  0xF6),
   #(43, 0xAF, '',  0x68),
   #(49, 0xAF, '',  0x29),
   #(54, 0xAF, '',  0x52),
@@ -115,8 +115,8 @@ if len (sys.argv) == 2:
 else:
   palette = int(sys.argv[2])
   
-if palette <0 or palette > 45:
-  print("Palette out of range. Value must be in the range 0 to 45.")
+if palette <0 or palette > 44:
+  print("Palette out of range. Value must be in the range 0 to 44.")
   sys.exit()
 
 romfile = open(sys.argv[1],'rb')

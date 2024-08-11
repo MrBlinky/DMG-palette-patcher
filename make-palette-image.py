@@ -1,5 +1,5 @@
 
-# Make DMG palette image v1.0 Mr.Blinky Aug 2024
+# Make DMG palette image v1.1 Mr.Blinky Aug 2024
 
 import os
 import sys
@@ -36,7 +36,6 @@ palette_data = [
   0xAE,
   0xAF,
   0xB2,
-  0xAF,
   0xAB,
   0x13,
   0xAD,
@@ -119,14 +118,14 @@ palette_colors = [
   0xFF,0x7F,0xEF,0x1B,0x80,0x61,0x00,0x00,
 ]
  
-img = Image.new("RGB", (450, 950),(224,224,224)) 
+img = Image.new("RGB", (450, 930),(224,224,224)) 
 canvas = ImageDraw.Draw(img)   
 font = ImageFont.truetype('arialbd.ttf', 16)  
 for i in range(3):
   canvas.text((48+i*136, 2),["OBJ0","OBJ1","BG0"][i], font = font, align ="left", fill ="black")
   
 y= 20
-for i in range(46):
+for i in range(45):
   x= 10
   for t in range(3):
     n = palette_data[i] & 0x1F
