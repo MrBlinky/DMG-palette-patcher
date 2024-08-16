@@ -1,5 +1,5 @@
 
-# Make DMG palette image v1.1 Mr.Blinky Aug 2024
+# Make DMG palette image v1.2 Mr.Blinky Aug 2024
 
 import os
 import sys
@@ -117,8 +117,8 @@ palette_colors = [
   0xFF,0x7F,0x8C,0x7E,0x00,0x7C,0x00,0x00,
   0xFF,0x7F,0xEF,0x1B,0x80,0x61,0x00,0x00,
 ]
- 
-img = Image.new("RGB", (450, 930),(224,224,224)) 
+
+img = Image.new("RGB", (450, 1084),(224,224,224)) 
 canvas = ImageDraw.Draw(img)   
 font = ImageFont.truetype('arialbd.ttf', 16)  
 for i in range(3):
@@ -143,5 +143,29 @@ for i in range(45):
     x += 8
   canvas.text( (x - 4, y), "{: 2}".format(i), font = font, align ="left", fill ="black")
   y += 20
+
+mono_palettes = [] 
+for i in range(len(palette_data)):
+  if palette_data[i] < 32:
+    mono_palettes.append(i)
+    
+canvas.text((10, y),"Full mono palettes:", font = font, align ="left", fill ="black")  
+y += 20
+
+for i in range(len(mono_palettes)):
+  x = 10
+  n = palette_data[mono_palettes[i]]
+  p = palette_offsets[3 * n + 2]
+  for t in range(3):
+    for c in range(4):
+      r = ((palette_colors[p + 2 * c] & 0x1F)+1) << 3
+      g = (((palette_colors[p + 2 * c] >> 5) + ((palette_colors[p + 2 * c + 1] & 3) << 3))+1) << 3
+      b = (((palette_colors[p + 2 * c + 1] >> 2)+1) << 3)
+      canvas.rectangle((x,y,x+32,y+16), fill = (r-1,g-1,b-1)) 
+      x += 32
+    x += 8
+  canvas.text( (x - 4, y), "{: 2}".format(mono_palettes[i]), font = font, align ="left", fill ="black")
+  y += 20
+  
 img.show() 
 img.save(os.path.dirname(os.path.abspath(sys.argv[0])) +os.sep+'dmg-palettes.png')
